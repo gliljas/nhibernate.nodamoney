@@ -11,7 +11,7 @@ namespace NHibernate.NodaMoney.Tests
 {
 
     [CollectionDefinition("Database tests")]
-    public class DatabaseCollection : ICollectionFixture<MsSqlNHibernateFixture>
+    public class DatabaseCollection : ICollectionFixture<BlappFixture>
     {
 
     }

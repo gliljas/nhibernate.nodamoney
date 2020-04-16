@@ -12,9 +12,9 @@ namespace NHibernate.NodaMoney.Tests
     [Collection("Database tests")]
     public class MoneyPersistenceTests : IDisposable
     {
-        private MsSqlNHibernateFixture _fixture;
+        private BlappFixture _fixture;
 
-        public MoneyPersistenceTests(MsSqlNHibernateFixture fixture)
+        public MoneyPersistenceTests(BlappFixture fixture)
         {
             _fixture = fixture;
         }

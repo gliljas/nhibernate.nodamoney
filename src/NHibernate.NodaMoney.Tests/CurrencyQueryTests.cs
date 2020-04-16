@@ -11,9 +11,9 @@ namespace NHibernate.NodaMoney.Tests
     [Collection("Database tests")]
     public class CurrencyQueryTests : IDisposable
     {
-        private MsSqlNHibernateFixture _fixture;
+        private BlappFixture _fixture;
 
-        public CurrencyQueryTests(MsSqlNHibernateFixture fixture)
+        public CurrencyQueryTests(BlappFixture fixture)
         {
             _fixture = fixture;
             using (var session = _fixture.SessionFactory.OpenSession())
