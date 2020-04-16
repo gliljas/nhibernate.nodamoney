@@ -7,12 +7,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NHibernate.NodaMoney", "NHi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NHibernate.NodaMoney.Tests", "NHibernate.NodaMoney.Tests\NHibernate.NodaMoney.Tests.csproj", "{A4AA3D63-D454-41DE-B2D6-BEB3C3498D5C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.csproj", "{11154609-D3C7-4D4B-9C5B-26D2C36238CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{11154609-D3C7-4D4B-9C5B-26D2C36238CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11154609-D3C7-4D4B-9C5B-26D2C36238CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD36D577-B65E-4FA3-924D-28B436D61447}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DD36D577-B65E-4FA3-924D-28B436D61447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD36D577-B65E-4FA3-924D-28B436D61447}.Release|Any CPU.ActiveCfg = Release|Any CPU
