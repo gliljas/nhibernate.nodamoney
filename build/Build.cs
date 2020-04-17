@@ -1,4 +1,5 @@
 using System;
+using System.Data.SqlClient;
 using System.Linq;
 using Nuke.Common;
 using Nuke.Common.Execution;
@@ -24,7 +25,7 @@ class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main () => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Compile);
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
@@ -35,6 +36,9 @@ class Build : NukeBuild
 
     AbsolutePath SourceDirectory => RootDirectory / "src";
     AbsolutePath OutputDirectory => RootDirectory / "output";
+
+    AbsolutePath TestProject => SourceDirectory / "NHibernate.NodaMoney.Tests/NHibernate.NodaMoney.Tests.csproj";
+
 
     Target Clean => _ => _
         .Before(Restore)
@@ -62,6 +66,30 @@ class Build : NukeBuild
                 .SetFileVersion(GitVersion.AssemblySemFileVer)
                 .SetInformationalVersion(GitVersion.InformationalVersion)
                 .EnableNoRestore());
+        });
+
+    Target SetupDatabase => _ => _
+        .Executes(() =>
+        {
+            using (var conn = new SqlConnection(@"Server=(local)\SQL2017;Database=master;User ID=sa;Password=Password12!"))
+            {
+                conn.Open();
+                var cmd = conn.CreateCommand();
+                cmd.CommandText = "CREATE DATABASE NodaMoney";
+                cmd.ExecuteNonQuery();
+            }
+            Environment.SetEnvironmentVariable("nhibernate:connection.connection_string", @"Server=(local)\SQL2017;Database=NodaMoney;User ID=sa;Password=Password12!");
+        });
+
+    Target RunTests => _ => _
+        .DependsOn(Compile)
+        .Executes(() => 
+        {
+            DotNetTest(s => s
+                .SetProjectFile(TestProject)
+                .SetConfiguration(Configuration)
+                .SetVerbosity(DotNetVerbosity.Normal)
+                );
         });
 
 }

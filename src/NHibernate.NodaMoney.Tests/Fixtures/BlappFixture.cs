@@ -20,8 +20,10 @@ namespace NHibernate.NodaMoney.Tests.Fixtures
             var root = TestHelper
                 .GetIConfigurationRoot();
 
-            root
-                .GetSection("nhibernate")
+            var nhibernate = root
+                .GetSection("nhibernate");
+
+            nhibernate
                 .Bind(configuration.Properties);
 
             var mapper = new ModelMapper();
